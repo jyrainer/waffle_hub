@@ -79,4 +79,48 @@ wh train --name my_classifier --dataset mnist_classification --epochs 30 --batch
 wh inference --name my_classifier --source datasets/mnist_classification/exports/YOLO --draw --device cpu
 ```
 
-See our [documentation](https://snuailab.github.io/waffle/) for more information!
+# Performance
+You can select a model by referring to the performance evaluation below.
+### Object Detection
+
+| Backend      |Model and size | image_size | mAPval | Speed (ms) | Parameters (M) | Dataset| GPU|
+|--------------|---------------|------------|--------|-----------------|----------------|--------|---|
+| ultralytics  | YOLOv8,n      | 640        | 37.3   | 0.99            | 3.2            | COCO    |A100|
+| ultralytics  | YOLOv8,s      | 640        | 44.9   | 1.20            | 11.2           | COCO    |A100|
+| ultralytics  | YOLOv8,m      | 640        | 50.2   | 1.83            | 25.9           | COCO    |A100|
+| ultralytics  | YOLOv8,l      | 640        | 52.9   | 2.39            | 43.7           | COCO    |A100|
+| ultralytics  | YOLOv8,x      | 640        | 53.9   | 3.53            | 68.2           | COCO    |A100|
+| hugging_face | DETA,base     | 640        | 51.6   | 100             | 52             | COCO 2017|V100|
+| hugging_face | DETR,base     | 800        | 42.0   | 35.4            | 41             |COCO 2017|V100|
+| hugging_face | DETR,large    | 800        | 43.5   | 50              | 60.7           |COCO 2017|V100|
+| hugging_face | Yolos,tiny    | 512 x *    | 28.7   | 1.00            | 6.5            |COCO 2017|1080Ti|
+| autocare_dlt | YOLOv5,s      |
+| autocare_dlt | YOLOv5,m      |
+| autocare_dlt | YOLOv5,l      |
+
+
+### Classification
+| Backend      |Model and size| image_size | Top1 Accuracy | Top5 Accuracy | Speed (ms) | Parameters (M) | Dataset|GPU|
+|--------------|-------------|--------------|---------------|---------------|--------------------------|----------------|-------|----|
+| ultralytics  | YOLOv8n-cls | 224          | 66.6          | 87.0          | 0.31                     | 2.7            |ImageNet|A100|
+| ultralytics  | YOLOv8s-cls | 224          | 72.3          | 91.1          | 0.35                     | 6.4            |ImageNet|A100|
+| ultralytics  | YOLOv8m-cls | 224          | 76.4          | 93.2          | 0.62                     | 17.0           |ImageNet|A100|
+| ultralytics  | YOLOv8l-cls | 224          | 78.0          | 94.1          | 0.87                     | 37.5           |ImageNet|A100|
+| ultralytics  | YOLOv8x-cls | 224          | 78.4          | 94.3          | 1.01                     | 57.4           |ImageNet|A100|
+| hugging_face | ViT,tiny    | 224          | 75.45         | 92.844        | 138.538                  | 5.82           |ImageNet|3090|
+| hugging_face | ViT,base    | 224          | 84.27         | 96.80         | 846.969                  | 86.6           |ImageNet|3090|
+| autocare_dlt | Classifier,s|
+| autocare_dlt | Classifier,m|
+| autocare_dlt | Classifier,l|
+
+### TextRecognition
+| Backend      |Model and size| image_size | mAPval | Speed (ms) | Parameters (M) | Dataset| GPU|
+|--------------|--------------|------------|--------|-----------------|----------------|--------|---|
+| autocare_dlt | TextRecognition,s|
+| autocare_dlt | TextRecognition,m|
+| autocare_dlt | TextRecognition,l|
+| autocare_dlt | LicencePlateRecognition,s|
+| autocare_dlt | LicencePlateRecognition,m|
+| autocare_dlt | LicencePlateRecognition,l|
+
+### See our [documentation](https://snuailab.github.io/waffle/) for more information!
